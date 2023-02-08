@@ -1,4 +1,11 @@
-import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Box,
+  CssBaseline,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container } from "@mui/system";
 import AbcIcon from "@mui/icons-material/Abc";
@@ -8,17 +15,22 @@ import React from "react";
 //For instruction and inspiration
 
 const NavBar = () => {
+  const emptyBarHeight = "63px";
   return (
-    <React.Fragment>
-      <AppBar position="static">
+    <Box>
+      <CssBaseline />
+      <AppBar position="fixed">
         <Toolbar>
-          <IconButton edge="start" color="inherit">
+          {/* <IconButton edge="start" color="inherit">
             <MenuIcon></MenuIcon>
-          </IconButton>
-          <Typography>NAME</Typography>
+          </IconButton> */}
+          <Typography variant="h5" align="center">
+            NAME
+          </Typography>
         </Toolbar>
       </AppBar>
-    </React.Fragment>
+      <div style={{ minHeight: emptyBarHeight }}></div>
+    </Box>
   );
 };
 
