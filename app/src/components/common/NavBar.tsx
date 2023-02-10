@@ -11,21 +11,38 @@ import { Container } from "@mui/system";
 import AbcIcon from "@mui/icons-material/Abc";
 import React from "react";
 
+export interface NavBarProps {
+  title?: string;
+  barBuffer?: string;
+  position?: BarPositions;
+  color?: "primary" | "secondary" | undefined;
+}
+
+export type BarPositions =
+  | "fixed"
+  | "absolute"
+  | "sticky"
+  | "static"
+  | "relative"
+  | undefined;
+
 //https://react.school/material-ui/appbar
 //For instruction and inspiration
+const NavBar = (props: NavBarProps) => {
+  const { title, barBuffer, position, color } = props;
+  const emptyBarHeight = barBuffer ? barBuffer : "63px";
+  const barPosition = position ? position : "fixed";
 
-const NavBar = () => {
-  const emptyBarHeight = "63px";
   return (
     <Box>
       <CssBaseline />
-      <AppBar position="fixed">
+      <AppBar color={color} position={barPosition}>
         <Toolbar>
           {/* <IconButton edge="start" color="inherit">
             <MenuIcon></MenuIcon>
           </IconButton> */}
           <Typography variant="h5" align="center">
-            NAME
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>

@@ -1,12 +1,96 @@
-import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import BarPositions from "../components/common/NavBar";
 import NavBar from "../components/common/NavBar";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "../theme.ts";
 
-<Meta title="NavBar" components={NavBar} />
+<Meta
+  title="NavBar"
+  parameters={{
+    viewMode: "docs",
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+  components={NavBar}
+  argTypes={{
+    title: {
+      defaultValue: "Title",
+      control: {
+        type: "text",
+      },
+      description: "Text serving as a title",
+    },
+    barBuffer: {
+      control: {
+        type: "text",
+      },
+      defaultValue: "63px",
+      description: "Buffer for the height of the bar",
+      table: {
+        defaultValue: {
+          summary: "63px",
+        },
+      },
+    },
+    position: {
+      type: { name: BarPositions },
+      defaultValue: "relative",
+      options: ["absolute", "relative", "fixed", "static", "sticky", undefined],
+      control: {
+        type: "radio",
+      },
+      description: "Position of the Navbar",
+      table: {
+        defaultValue: {
+          summary: "fixed",
+        },
+      },
+    },
+    color: {
+      defaultValue: "primary",
+      description: "Color of the bar provided by the MUI theme",
+      options: ["primary", "secondary"],
+      control: {
+        type: "radio",
+      },
+      table: {
+        defaultValue: {
+          summary: "primary",
+        },
+      },
+    },
+  }}
+/>
 
-export const template = (args) => <NavBar {...args} />;
+export const template = (args) => (
+  <>
+    <NavBar {...args} />
+  </>
+);
 
 # NavBar
 
 <Canvas>
-  <Story name="NavBar">{template.bind({})}</Story>
+  <Story
+    name="NavBar"
+    args={{}}
+    decorators={[
+      (Story) => (
+        <ThemeProvider theme={theme}>
+          <Story />
+        </ThemeProvider>
+      ),
+    ]}
+  >
+    {template.bind({})}
+  </Story>
 </Canvas>
+
+# Parameters
+
+<ArgsTable story="NavBar" />
+
+# To Do
+
+- Add Menu component as props
