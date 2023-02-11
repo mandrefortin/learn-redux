@@ -9,13 +9,14 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container } from "@mui/system";
 import AbcIcon from "@mui/icons-material/Abc";
-import React from "react";
+import React, { Children } from "react";
 
 export interface NavBarProps {
   title?: string;
   barBuffer?: string;
   position?: BarPositions;
   color?: "primary" | "secondary" | undefined;
+  children?: JSX.Element;
 }
 
 export type BarPositions =
@@ -29,10 +30,9 @@ export type BarPositions =
 //https://react.school/material-ui/appbar
 //For instruction and inspiration
 const NavBar = (props: NavBarProps) => {
-  const { title, barBuffer, position, color } = props;
+  const { title, barBuffer, position, color, children } = props;
   const emptyBarHeight = barBuffer ? barBuffer : "63px";
   const barPosition = position ? position : "fixed";
-
   return (
     <Box>
       <CssBaseline />
@@ -44,6 +44,7 @@ const NavBar = (props: NavBarProps) => {
           <Typography variant="h5" align="center">
             {title}
           </Typography>
+          {children}
         </Toolbar>
       </AppBar>
       <div style={{ minHeight: emptyBarHeight }}></div>
